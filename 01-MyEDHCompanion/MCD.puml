@@ -1,0 +1,30 @@
+@startuml mcd
+
+Class User {
+    String username
+    String email
+    String password
+    String archidekt_refresh_token
+    String archidekt_access_token
+
+}
+
+Class Player {
+    String name
+}
+
+Class Deck {
+    String name
+    String archidekt_id
+    String games_played
+    String games_won
+    
+}
+
+Class Pod {
+    String name
+}
+
+User --|> Player
+Player "1..1" -- "0..*" Pod
+Player "0..*" -- "0..1" Deck
