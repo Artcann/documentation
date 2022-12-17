@@ -21,10 +21,19 @@ Class Deck {
     
 }
 
+Class Game {
+    Number NumberOfPlayers
+    String name
+    Date database
+}
+
 Class Pod {
     String name
 }
 
-User --|> Player
+User "0..*" -- "0..1" Player
 Player "1..1" -- "0..*" Pod
 Player "0..*" -- "0..1" Deck
+Pod "0..*" -- "1..1" Game
+Deck "0..*" -- "1..*" Game : Players
+Deck "0..*" -- "1..1" Game : Winner
