@@ -1,0 +1,26 @@
+@startuml C4_diag
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0
+!includeurl ICONURL/common.puml
+!includeurl ICONURL/devicons2/typescript.puml
+!includeurl ICONURL/devicons2/android.puml
+!includeurl ICONURL/devicons2/amazonwebservices_wordmark.puml
+!includeurl ICONURL/devicons2/postgresql_wordmark.puml
+
+System_Boundary("c1", "My-EDH-Companion") {
+    Container(api, "API", "NestJS", "The API of the application, handles some business logic and assure connection with other APIs", $sprite="typescript")
+    Container(android, "Mobile APP", "Jetpack Compose", "The main frontend of the application, handles a lot of business logic", $sprite="android")
+    ContainerDb(api_db, "API DB", "PostgreSQL", "The database used by the backend to store all the important data", $sprite="postgresql_wordmark")
+}
+
+
+
+System_Ext(ses, "Simple Email Sender", "Mailer used to send onboarding verification mails", $sprite="amazonwebservices_wordmark")
+
+Rel(android, api, "Uses", "https")
+Rel(api, ses, "Sends mails with", "https")
+Rel(api, api_db, "Read/Writes")
+
+
+@enduml
