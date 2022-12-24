@@ -7,6 +7,9 @@
 !includeurl ICONURL/devicons2/android.puml
 !includeurl ICONURL/devicons2/amazonwebservices_wordmark.puml
 !includeurl ICONURL/devicons2/postgresql_wordmark.puml
+!includeurl ICONURL/font-awesome-5/users.puml
+
+Person(user, "EDH Player", "People that wants stats about their Magic Games", $sprite="users")
 
 System_Boundary("c1", "My-EDH-Companion") {
     Container(api, "API", "NestJS", "The API of the application, handles some business logic and assure connection with other APIs", $sprite="typescript")
@@ -16,9 +19,14 @@ System_Boundary("c1", "My-EDH-Companion") {
 
 
 
-System_Ext(ses, "Simple Email Sender", "Mailer used to send onboarding verification mails", $sprite="amazonwebservices_wordmark")
+System_Ext(ses, "Simple Email Sender", "Used to send onboarding verification mails", $sprite="amazonwebservices_wordmark")
+System_Ext(scryfall, "Scryfall API", "Used as a card database and search engine")
+System_Ext(archidekt, "Archidekt API", "Used to retrieves decks of the users")
 
+Rel(user, android, "Uses")
 Rel(android, api, "Uses", "https")
+Rel(api, scryfall, "Consume", "https")
+Rel(api, archidekt, "Consume", "https")
 Rel(api, ses, "Sends mails with", "https")
 Rel(api, api_db, "Read/Writes")
 

@@ -3,9 +3,11 @@
 Class User {
     String username
     String email
-    String password
+    String password ////
+    String refresh_token ////
     String archidekt_refresh_token
     String archidekt_access_token
+    Number archidekt_user_id
 
 }
 
@@ -18,13 +20,13 @@ Class Deck {
     String archidekt_id
     String games_played
     String games_won
-    
+    String commander
 }
 
 Class Game {
     Number NumberOfPlayers
     String name
-    Date database
+    Date date
 }
 
 Class Pod {
